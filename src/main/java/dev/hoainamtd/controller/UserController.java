@@ -1,6 +1,8 @@
 package dev.hoainamtd.controller;
 
-import dev.hoainamtd.dto.response.UserRequestDTO;
+import dev.hoainamtd.dto.reuqest.UserRequestDTO;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,38 +11,36 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     @PostMapping("/")
-    public String addUser(@RequestBody UserRequestDTO user) {
+    public String addUser(@Valid @RequestBody UserRequestDTO user) {
         return "User added";
     }
 
     @PutMapping("/{userId}")
-    public String updateUser(@PathVariable int userId, @RequestBody UserRequestDTO user) {
+    public String updateUser(@PathVariable @Min(1) int userId, @Valid @RequestBody UserRequestDTO user) {
         System.out.println("Update user");
         return "User updated";
     }
 
     @PatchMapping("/{userId}")
-    public String updateStatus(@PathVariable boolean enable) {
+    public String updateStatus(@Min(1) @PathVariable int userId,
+                               @RequestParam boolean status) {
         return "User Status changed";
     }
 
     @DeleteMapping("/{userId}")
-    public String deleteUser(@PathVariable int userId){
+    public String deleteUser(@PathVariable @Min(value = 1, message = "userId must be greater than 0") int userId) {
         return "User deleted";
     }
 
     @GetMapping("/{userId}")
-    public UserRequestDTO getUser(@PathVariable int userId) {
+    public UserRequestDTO getUser(@PathVariable @Min(1) int userId) {
         return new UserRequestDTO("Tay", "Java", "admin@tayjava.vn", "0123456789");
     }
 
     @GetMapping("/list")
-    public List<UserRequestDTO> getAllUser(
-            @RequestParam(required = false) String email,
-            @RequestParam(defaultValue = "0") int pageNo,
-            @RequestParam(defaultValue = "10") int pageSize
-    ) {
-        return List.of(new UserRequestDTO("Tay", "Java", "phone", "email"),
-                new UserRequestDTO("Tay1", "Java", "phone", "email"));
+    public List<UserRequestDTO> getAllUser(@RequestParam(defaultValue = "0", required = false) int pageNo,
+                                           @Min(10) @RequestParam(defaultValue = "20", required = false) int pageSize) {
+        return List.of(new UserRequestDTO("Tay", "Java", "admin@tayjava.vn", "0123456789"),
+                new UserRequestDTO("Leo", "Messi", "leomessi@email.com", "0123456456"));
     }
 }
