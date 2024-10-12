@@ -1,11 +1,8 @@
 package dev.hoainamtd.dto.reuqest;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-<<<<<<< HEAD
 import dev.hoainamtd.util.*;
-=======
 import dev.hoainamtd.util.PhoneNumber;
->>>>>>> origin/main
 import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -30,7 +27,6 @@ public class UserRequestDTO implements Serializable {
     @JsonFormat(pattern = "MM/dd/yyyy")
     private Date dateOfBirth;
 
-<<<<<<< HEAD
 //    dung enumpattern
     @EnumPattern(name = "status", regexp = "ACTIVE|INACTIVE|NONE")
     private UserStatus status;
@@ -44,8 +40,6 @@ public class UserRequestDTO implements Serializable {
     @EnumValue(name = "type", enumClass = UserType.class)
     private String type;
 
-=======
->>>>>>> origin/main
     @NotNull(message = "username must be not null")
     private String username;
 
@@ -200,7 +194,6 @@ public class UserRequestDTO implements Serializable {
     public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
     }
-<<<<<<< HEAD
 
     public UserStatus getStatus() {
         return status;
@@ -225,6 +218,4 @@ public class UserRequestDTO implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
-=======
->>>>>>> origin/main
 }
