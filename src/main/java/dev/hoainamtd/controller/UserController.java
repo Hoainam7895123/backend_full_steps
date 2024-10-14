@@ -1,5 +1,6 @@
 package dev.hoainamtd.controller;
 
+import dev.hoainamtd.configuration.Translator;
 import dev.hoainamtd.dto.response.ResponseData;
 import dev.hoainamtd.dto.response.ResponseError;
 import dev.hoainamtd.dto.response.ResponseSuccess;
@@ -27,7 +28,7 @@ public class UserController {
         try {
             userService.addUser(user);
             System.out.println("Request add user " + user.getFirstName());
-            return new ResponseData<>(HttpStatus.CREATED.value(), "User added successfully,", 1);
+            return new ResponseData<>(HttpStatus.CREATED.value(), Translator.toLocate("user.add.success"), 1);
         } catch (Exception e) {
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), e.getMessage());
         }
