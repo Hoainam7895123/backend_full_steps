@@ -1,0 +1,7 @@
+open:
+  api:
+    title: API document
+    version: v1.0.0
+    description: Mota API service
+    serverUrl: http://localhost:8080
+    serverName: server test
