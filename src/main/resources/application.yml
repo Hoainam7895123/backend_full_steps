@@ -1,7 +1,8 @@
-open:
-  api:
-    title: API document
-    version: v1.0.0
-    description: Mota API service
-    serverUrl: http://localhost:8080
-    serverName: server test
+spring:
+  application:
+    name: tay-java-app
+  profiles:
+    active: @spring.profiles.active@
+
+#    build moi truong mvn clean package -P dev or test or prod,
+#    thì đây là cách lấy giá trị được định nghĩa trong pom @spring.profiles.active@

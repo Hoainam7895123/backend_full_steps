@@ -8,26 +8,25 @@ import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.util.List;
 
 @Configuration
+@Profile("!prod") // k dc build tren moi truong prod
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI openAPI(@Value("${open.api.title}") String title,
-                           @Value("${open.api.version}") String version,
-                           @Value("${open.api.description}") String description,
-                           @Value("${open.api.serverUrl}") String serverUrl,
-                           @Value("${open.api.serverName}") String serverName
-                           ) {
-        return new OpenAPI().info(new Info()
-                        .title(title)
+    public OpenAPI openAPI(
+            @Value("${openapi.service.title}") String title,
+            @Value("${openapi.service.version}") String version,
+            @Value("${openapi.service.server}") String serverUrl) {
+        return new OpenAPI()
+                .servers(List.of(new Server().url(serverUrl)))
+                .info(new Info().title(title)
+                        .description("API documents")
                         .version(version)
-                        .description(description)
-                        .license(new License().name("API License").url("http://domain.vn/license")))
-                .servers(List.of(new Server().url(serverUrl).description(serverName)));
-
+                        .license(new License().name("Apache 2.0").url("https://springdoc.org")));
     }
 
     //Tich hop cai url vd /v3/api-docs de tich vao micro service
