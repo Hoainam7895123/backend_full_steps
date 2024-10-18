@@ -1,13 +1,28 @@
-server:
-  port: 8080
 spring:
   config:
     activate:
       on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tay_java
+    username: postgres
+    password: 12345678
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
 openapi:
   service:
     api-docs: api-service
-    title: API document
-    version: v1.0.0
     server: http://localhost:${server.port}
-
+    title: API Document
+    version: 1.0.0

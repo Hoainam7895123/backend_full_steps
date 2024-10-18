@@ -1,13 +1,17 @@
-server:
-  port: 8081
 spring:
   config:
     activate:
       on-profile: test
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
 openapi:
   service:
     api-docs: api-service
-    title: API document
-    version: v1.0.0
-    server: http://localhost:${server.port}
+    server: ${API_URL:DUMMY-API-URL}
+    title: API Document
+    version: 1.0.0
 

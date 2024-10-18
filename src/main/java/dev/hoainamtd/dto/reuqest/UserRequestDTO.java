@@ -13,61 +13,48 @@ import java.util.Set;
 
 @Getter
 public class UserRequestDTO implements Serializable {
-    @NotBlank(message = "firstName must be not blank")
+
+    @NotBlank(message = "firstName must be not blank") // Khong cho phep gia tri blank
     private String firstName;
-    @NotNull(message = "lastName must be not null")
+
+    @NotNull(message = "lastName must be not null") // Khong cho phep gia tri null
     private String lastName;
 
-//    @Pattern(regexp = "^\\d{10}$", message = "phone invalid format")
-    @PhoneNumber
-    private String phone;
-    @Email(message = "email invalid format")
+    @Email(message = "email invalid format") // Chi chap nhan nhung gia tri dung dinh dang email
     private String email;
+
+    //@Pattern(regexp = "^\\d{10}$", message = "phone invalid format")
+    @PhoneNumber(message = "phone invalid format")
+    private String phone;
 
     @NotNull(message = "dateOfBirth must be not null")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "MM/dd/yyyy")
     private Date dateOfBirth;
 
-//    dung enumpattern
-    @EnumPattern(name = "status", regexp = "ACTIVE|INACTIVE|NONE")
-    private UserStatus status;
-
-    //dung gendersubset
-    @GenderSubset(anyOf = {Gender.MALE, Gender.FEMALE})
+    //@Pattern(regexp = "^male|female|other$", message = "gender must be one in {male, female, other}")
+    @GenderSubset(anyOf = {Gender.MALE, Gender.FEMALE, Gender.OTHER})
     private Gender gender;
-
-    // dung enumvalue
-    @NotNull(message = "type must be not null")
-    @EnumValue(name = "type", enumClass = UserType.class)
-    private String type;
 
     @NotNull(message = "username must be not null")
     private String username;
 
-    @NotNull(message = "password must be not null")
     private String password;
 
-    @NotEmpty(message = "addresses can not empty")
-    private Set<Address> addresses;
+    @NotNull(message = "type must be not null")
+    @EnumValue(name = "type", enumClass = UserType.class)
+    private String type;
 
-    public UserRequestDTO(String firstName, String lastName, String phone, String email) {
+    @NotEmpty(message = "addresses can not empty")
+    private Set<AddressDTO> addresses;
+
+    @EnumPattern(name = "status", regexp = "ACTIVE|INACTIVE|NONE")
+    private UserStatus status;
+
+    public UserRequestDTO(String firstName, String lastName, String email, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phone = phone;
         this.email = email;
-    }
-
-    @Getter
-    public static class Address {
-        private String apartmentNumber;
-        private String floor;
-        private String building;
-        private String streetNumber;
-        private String street;
-        private String city;
-        private String country;
-        private Integer addressType;
-
+        this.phone = phone;
     }
 }

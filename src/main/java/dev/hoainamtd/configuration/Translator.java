@@ -15,7 +15,7 @@ public class Translator {
         Translator.messageSource = messageSource;
     }
 
-    public static String toLocate(String msgCode) {
+    public static String toLocale(String msgCode) {
         // lấy cái locale hiện tại ở LocalResolver
         Locale locale = LocaleContextHolder.getLocale();
         return messageSource.getMessage(msgCode, null, locale);
