@@ -5,8 +5,11 @@ import dev.hoainamtd.dto.response.UserDetailResponse;
 import dev.hoainamtd.dto.reuqest.UserRequestDTO;
 import dev.hoainamtd.util.UserStatus;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService {
+
+    UserDetailsService userDetailsService();
     long saveUser(UserRequestDTO request);
 
     void updateUser(long userId, UserRequestDTO request);

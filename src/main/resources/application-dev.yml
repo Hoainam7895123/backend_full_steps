@@ -26,3 +26,10 @@ openapi:
     server: http://localhost:${server.port}
     title: API Document
     version: 1.0.0
+
+
+jwt:
+  expiryHour: 1
+  expiryDay: 14
+  secretKey: 0ee85b111058a6679e0b758abcc3082b0a983d1dc35f6bc876322d7619cd3e05
+  refreshKey: KJU55vEHaWQ7761OxnO73dz5XUS8I/T7zzpq+BOKMEQ=
